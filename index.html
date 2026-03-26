@@ -71,13 +71,22 @@ header *{pointer-events:auto}
 .header-links a:hover{opacity:1}
 
 .header-phone{
-  font-size:.7rem;font-weight:500;letter-spacing:.08em;
+  font-family:'Cormorant Garamond',serif;
+  font-size:.95rem;font-weight:400;font-style:italic;
+  letter-spacing:.02em;
   color:#fff;text-decoration:none;
-  padding:.55rem 1.3rem;border-radius:80px;
-  border:1px solid rgba(255,255,255,.35);
-  transition:all .3s;
+  position:relative;
+  transition:opacity .3s;
 }
-.header-phone:hover{background:rgba(255,255,255,.1)}
+.header-phone::after{
+  content:'';position:absolute;
+  bottom:-.15em;left:0;width:100%;height:1px;
+  background:var(--gold);
+  transform:scaleX(0);transform-origin:right;
+  transition:transform .4s cubic-bezier(.25,.46,.45,.94);
+}
+.header-phone:hover::after{transform:scaleX(1);transform-origin:left}
+.header-phone svg{display:none}
 
 .burger{
   display:none;background:none;border:none;cursor:pointer;
@@ -145,25 +154,38 @@ header *{pointer-events:auto}
 }
 
 .hero-ctas{
-  display:flex;gap:.8rem;margin-top:2rem;flex-wrap:wrap;
+  display:flex;align-items:center;gap:2.5rem;margin-top:2.5rem;flex-wrap:wrap;
 }
 
-.cta{
+.cta-phone-hero{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.4rem,2.5vw,1.8rem);
+  font-weight:400;letter-spacing:.02em;
+  color:var(--gold);text-decoration:none;
+  display:flex;align-items:center;gap:.6rem;
+  transition:color .3s;
+}
+.cta-phone-hero:hover{color:var(--cream)}
+.cta-phone-hero svg{
+  width:18px;height:18px;opacity:.5;
+}
+
+.cta-menu{
   font-family:'Inter',sans-serif;
-  font-size:.75rem;font-weight:500;letter-spacing:.06em;
-  padding:.85rem 2rem;border-radius:80px;
-  text-decoration:none;transition:all .4s cubic-bezier(.25,.46,.45,.94);
-  display:inline-block;
+  font-size:.7rem;font-weight:500;
+  text-transform:uppercase;letter-spacing:.16em;
+  color:var(--cream40);text-decoration:none;
+  position:relative;padding-bottom:.2rem;
+  transition:color .3s;
 }
-.cta-fill{
-  background:var(--cream);color:var(--dark);
+.cta-menu::after{
+  content:'';position:absolute;
+  bottom:0;left:0;width:100%;height:1px;
+  background:var(--cream40);
+  transition:background .3s;
 }
-.cta-fill:hover{background:var(--gold);transform:translateY(-2px)}
-.cta-outline{
-  color:var(--cream);
-  border:1px solid var(--cream40);
-}
-.cta-outline:hover{border-color:var(--cream)}
+.cta-menu:hover{color:var(--cream)}
+.cta-menu:hover::after{background:var(--cream)}
 
 /* scroll cue */
 .scroll-cue{
@@ -198,7 +220,7 @@ header *{pointer-events:auto}
 .split-img img{
   width:100%;height:100%;object-fit:cover;
   transform:scale(1.55);object-position:center 30%;
-  filter:sepia(.25) saturate(1.1) hue-rotate(-8deg) brightness(1.02);
+  filter:grayscale(1) sepia(.35) brightness(.95) contrast(1.05);
 }
 .split-text{
   display:flex;flex-direction:column;justify-content:center;
@@ -471,9 +493,8 @@ footer p{font-size:.68rem;color:var(--cream40);letter-spacing:.04em}
 @media(max-width:680px){
   header{padding:1rem 1.2rem}
   .header-links{display:none}
-  .header-phone{
-    font-size:0;padding:.5rem;border-radius:50%;
-  }
+  .header-phone{font-size:.85rem}
+  .header-phone::after{display:none}
   .burger{display:block}
   .header-links.open{
     display:flex;flex-direction:column;
@@ -538,8 +559,11 @@ footer p{font-size:.68rem;color:var(--cream40);letter-spacing:.04em}
     <div class="hero-line" data-r data-d="1"></div>
     <p class="hero-desc" data-r data-d="2">Prenez un siège, installez-vous à votre aise. Christophe vous propose des menus du jour travaillés avec des produits frais et locaux. Pâtisseries maison.</p>
     <div class="hero-ctas" data-r data-d="3">
-      <a href="tel:0618471960" class="cta cta-fill">Réserver · 06 18 47 19 60</a>
-      <a href="#menu" class="cta cta-outline">Voir la carte</a>
+      <a href="tel:0618471960" class="cta-phone-hero">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        06 18 47 19 60
+      </a>
+      <a href="#menu" class="cta-menu">Voir la carte</a>
     </div>
   </div>
   <div class="scroll-cue">
@@ -565,13 +589,6 @@ footer p{font-size:.68rem;color:var(--cream40);letter-spacing:.04em}
     </div>
   </div>
 </section>
-
-<!-- FOOD STRIP -->
-<div class="food-strip">
-  <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=600&fit=crop&crop=center" alt="Plat appétissant" loading="lazy">
-  <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=600&fit=crop&crop=center" alt="Assiette gastronomique" loading="lazy">
-  <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=600&h=600&fit=crop&crop=center" alt="Pâtisserie artisanale" loading="lazy">
-</div>
 
 <!-- PATISSERIE — cinematic -->
 <div class="cine">
