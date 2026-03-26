@@ -104,6 +104,7 @@ header.scrolled{background:rgba(28,20,16,.92);backdrop-filter:blur(16px);-webkit
 .hero-img{
   position:absolute;inset:0;
   background:url('facade.jpg') center/cover;
+  filter:sepia(.4) saturate(1.15) brightness(.8) hue-rotate(-8deg);
   transform:scale(1.05);
   transition:transform 8s cubic-bezier(.25,.46,.45,.94);
 }
@@ -113,10 +114,10 @@ header.scrolled{background:rgba(28,20,16,.92);backdrop-filter:blur(16px);-webkit
   content:'';position:absolute;inset:0;
   background:
     linear-gradient(180deg,
-      rgba(28,20,16,.45) 0%,
-      rgba(28,20,16,.35) 35%,
-      rgba(28,20,16,.7) 75%,
-      rgba(28,20,16,.95) 100%
+      rgba(28,20,16,.55) 0%,
+      rgba(28,20,16,.45) 35%,
+      rgba(28,20,16,.75) 75%,
+      rgba(28,20,16,.96) 100%
     );
 }
 
